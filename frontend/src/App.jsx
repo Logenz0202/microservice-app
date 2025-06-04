@@ -1,19 +1,19 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import AddParcelForm from './components/AddParcelForm'
+import ParcelList from './components/ParcelList'
 
 function App() {
-  const [message, setMessage] = useState('Loading...')
+  const [trackingNumbers, setTrackingNumbers] = useState([])
 
-  useEffect(() => {
-    fetch('/api/hello')
-      .then(res => res.json())
-      .then(data => setMessage(data.message))
-      .catch(() => setMessage('Error fetching backend'))
-  }, [])
+  const handleAdd = (number) => {
+    setTrackingNumbers(prev => [...new Set([...prev, number])])
+  }
 
   return (
-    <div>
-      <h1>Frontend (React)</h1>
-      <p>Message from backend: {message}</p>
+    <div style={{ padding: '2rem' }}>
+      <h1>Śledzenie Paczek</h1>
+      <AddParcelForm onAdd={handleAdd} />
+      <ParcelList trackingNumbers={trackingNumbers} />
     </div>
   )
 }

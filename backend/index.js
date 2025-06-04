@@ -1,15 +1,15 @@
 import express from 'express'
 import cors from 'cors'
+import parcels from './routes/parcels.js'
 
 const app = express()
 const port = 5000
 
 app.use(cors())
+app.use(express.json())
 
-app.get('/api/hello', (req, res) => {
-  res.json({ message: 'Hello from backend!' })
-})
+app.use('/api/parcels', parcels)
 
-app.listen(port, '0.0.0.0', () => {
-  console.log(`Backend listening on port ${port}`)
+app.listen(port, () => {
+  console.log(`Backend running on http://localhost:${port}`)
 })
