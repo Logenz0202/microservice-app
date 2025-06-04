@@ -17,7 +17,7 @@ export default function ParcelList({ trackingNumbers }) {
     <ul>
       {parcels.map(p => (
         <li key={p.tracking_number}>
-          <strong>{p.tracking_number}</strong> – {p.status}
+          <strong>{p.tracking_number}</strong> - {p.status}
         </li>
       ))}
     </ul>

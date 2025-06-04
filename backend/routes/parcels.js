@@ -6,10 +6,14 @@ const router = express.Router()
 router.post('/', async (req, res) => {
   const { tracking_number } = req.body
   try {
-    await db.query('INSERT INTO parcels (tracking_number) VALUES ($1) ON CONFLICT DO NOTHING', [tracking_number])
+    await db.query('INSERT INTO parcels (tracking_number) VALUES ($1)', [tracking_number])
     res.status(201).json({ message: 'Parcel added' })
   } catch (err) {
-    res.status(500).json({ error: 'DB insert error' })
+    if (err.code === '23505') {
+      res.status(409).json({ error: 'Tracking number already exists' })
+    } else {
+      res.status(500).json({ error: 'DB insert error' })
+    }
   }
 })
 
