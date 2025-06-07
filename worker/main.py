@@ -2,7 +2,7 @@ import time
 import random
 from db import get_connection
 
-STATUSES = ['Wysłana', 'W drodze', 'Dostarczona']
+STATUSES = ['Nadana', 'Wysłana', 'W drodze', 'Dostarczona']
 
 def update_statuses():
     conn = get_connection()

@@ -6,7 +6,11 @@ const router = express.Router()
 router.post('/', async (req, res) => {
   const { tracking_number } = req.body
   try {
-    await db.query('INSERT INTO parcels (tracking_number) VALUES ($1)', [tracking_number])
+    const delay = Math.floor(Math.random() * 11) + 10
+    await db.query(
+      `INSERT INTO parcels (tracking_number, status, next_update) VALUES ($1, 'Nadana', NOW() + INTERVAL '${delay} seconds')`,
+      [tracking_number]
+    )
     res.status(201).json({ message: 'Parcel added' })
   } catch (err) {
     if (err.code === '23505') {

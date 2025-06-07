@@ -9,7 +9,7 @@ export default function ParcelList({ trackingNumbers }) {
       Promise.all(trackingNumbers.map(getParcel))
         .then(setParcels)
         .catch(console.error)
-    }, 3000)
+    }, 1000)
     return () => clearInterval(interval)
   }, [trackingNumbers])
 
