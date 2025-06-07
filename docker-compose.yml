@@ -1,6 +1,7 @@
 services:
   frontend:
     build: ./frontend
+    platform: linux/amd64
     ports:
       - "3000:80"
     depends_on:
@@ -15,6 +16,7 @@ services:
 
   backend:
     build: ./backend
+    platform: linux/amd64
     ports:
       - "5000:5000"
     environment:
@@ -31,6 +33,7 @@ services:
 
   worker:
     build: ./worker
+    platform: linux/amd64
     depends_on:
       - backend
     environment:
@@ -45,6 +48,7 @@ services:
 
   db:
     image: postgres:15
+    platform: linux/amd64
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
