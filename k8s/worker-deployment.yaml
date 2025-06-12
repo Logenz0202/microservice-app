@@ -24,6 +24,10 @@ spec:
         io.kompose.network/microservice-app-app-network: "true"
         io.kompose.service: worker
     spec:
+      initContainers:
+        - name: wait-for-db
+          image: busybox
+          command: ['sh', '-c', 'until nc -z db 5432; do echo "waiting for db"; sleep 5; done;']
       containers:
         - env:
             - name: DATABASE_URL

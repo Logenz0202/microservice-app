@@ -44,7 +44,6 @@ spec:
           name: db
           ports:
             - containerPort: 5432
-              hostPort: 5432
               protocol: TCP
           resources: {}
           volumeMounts:
@@ -52,6 +51,7 @@ spec:
               name: db-data
             - mountPath: /docker-entrypoint-initdb.d/init.sql
               name: db-claim1
+              subPath: init.sql
       restartPolicy: Always
       volumes:
         - name: db-data
