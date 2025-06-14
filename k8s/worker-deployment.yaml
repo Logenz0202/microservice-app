@@ -34,14 +34,6 @@ spec:
               value: postgresql://user:password@db:5432/appdb
           image: worker
           imagePullPolicy: Never
-          livenessProbe:
-            exec:
-              command:
-                - pgrep
-                - python
-            failureThreshold: 3
-            periodSeconds: 30
-            timeoutSeconds: 10
           name: worker
           resources: {}
       restartPolicy: Always

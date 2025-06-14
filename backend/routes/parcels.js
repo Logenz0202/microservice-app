@@ -16,6 +16,7 @@ router.post('/', async (req, res) => {
     if (err.code === '23505') {
       res.status(409).json({ error: 'Tracking number already exists' })
     } else {
+      console.error(err)
       res.status(500).json({ error: 'DB insert error' })
     }
   }
@@ -31,6 +32,7 @@ router.get('/:tracking_number', async (req, res) => {
       res.status(404).json({ error: 'Not found' })
     }
   } catch (err) {
+    console.error(err)
     res.status(500).json({ error: 'DB read error' })
   }
 })

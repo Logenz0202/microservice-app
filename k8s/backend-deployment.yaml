@@ -30,16 +30,10 @@ spec:
               value: postgresql://user:password@db:5432/appdb
           image: backend
           imagePullPolicy: Never
-          livenessProbe:
-            exec:
-              command:
-                - wget
-                - --spider
-                - -q
-                - http://localhost:5000/api/parcels/TEST
-            failureThreshold: 3
-            periodSeconds: 30
-            timeoutSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: 5000
           name: backend
           ports:
             - containerPort: 5000

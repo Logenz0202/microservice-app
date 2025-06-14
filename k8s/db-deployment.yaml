@@ -34,10 +34,10 @@ spec:
             - name: POSTGRES_USER
               value: user
           image: postgres:15
-          livenessProbe:
+          readinessProbe:
             exec:
               command:
-                - pg_isready -U user
+                ["pg_isready", "-U", "user"]
             failureThreshold: 5
             periodSeconds: 30
             timeoutSeconds: 5
@@ -50,14 +50,14 @@ spec:
             - mountPath: /var/lib/postgresql/data
               name: db-data
             - mountPath: /docker-entrypoint-initdb.d/init.sql
-              name: db-claim1
+              name: db-config
               subPath: init.sql
       restartPolicy: Always
       volumes:
         - name: db-data
           persistentVolumeClaim:
             claimName: db-data
-        - name: db-claim1
-          persistentVolumeClaim:
-            claimName: db-claim1
+        - name: db-config
+          configMap:
+            name: db-configmap
 status: {}

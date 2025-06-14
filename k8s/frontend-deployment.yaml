@@ -27,16 +27,10 @@ spec:
       containers:
         - image: frontend
           imagePullPolicy: Never
-          livenessProbe:
-            exec:
-              command:
-                - wget
-                - --spider
-                - -q
-                - http://localhost
-            failureThreshold: 3
-            periodSeconds: 30
-            timeoutSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
           name: frontend
           ports:
             - containerPort: 80
