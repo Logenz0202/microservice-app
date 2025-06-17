@@ -1,3 +1,5 @@
+This is how `db-secret.yaml` looks like:
+
 ```yaml
 apiVersion: v1
 kind: Secret
